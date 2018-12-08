@@ -1,0 +1,37 @@
+micronaut:
+    application:
+        name: gateway 
+    server:
+        port: 8080
+    security:
+        enabled: true
+        endpoints:
+            login:
+                enabled: true
+            oauth:
+                enabled: true
+        token:
+            jwt:
+                enabled: true
+                signatures:
+                   secret:
+                       generator:
+                           secret: pleaseChangeThisSecretForANewOne
+            writer:
+                header:
+                   enabled: true
+            propagation:
+                enabled: true
+                service-id-regex: "books|inventory"
+consul:
+    client:
+        registration: 
+            enabled: true
+        defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+tracing:
+    zipkin:
+        http:
+            url: http://localhost:9411
+        enabled: true
+        sampler:
+            probability: 1
